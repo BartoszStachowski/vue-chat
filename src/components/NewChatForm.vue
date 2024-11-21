@@ -2,8 +2,8 @@
   <form>
     <Textarea
       v-model="message"
-      placeholder="Type a messag and hit enter to send..."
-      @keypress.enter="handleSubmit"
+      placeholder="Type a message and hit enter to send..."
+      @keypress.enter.prevent="handleSubmit"
     />
   </form>
 </template>
@@ -30,6 +30,7 @@ export default {
         message: message.value,
         createdAt: serverTimestamp(),
       };
+      message.value = '';
       console.log(chat);
     };
 

@@ -5,6 +5,7 @@
       placeholder="Type a message and hit enter to send..."
       @keypress.enter.prevent="handleSubmit"
     />
+    <div class="error">{{error}}</div>
   </form>
 </template>
 <script>
@@ -13,6 +14,7 @@ import { ref } from 'vue';
 import { serverTimestamp } from 'firebase/firestore';
 
 import Textarea from '@/components/Textarea.vue';
+import useCollection from '@/composables/useCollection';
 
 export default {
   name: 'NewChatForm',
@@ -22,7 +24,7 @@ export default {
   setup() {
     const message = ref(null);
     const { user } = getUser();
-    console.log('user', user);
+    const { sendDataToFirestore, error } = useCollection('messages');
 
     const handleSubmit = async () => {
       const chat = {
@@ -30,11 +32,13 @@ export default {
         message: message.value,
         createdAt: serverTimestamp(),
       };
-      message.value = '';
-      console.log(chat);
+      await sendDataToFirestore(chat);
+      if (!error.value) {
+        message.value = '';
+      }
     };
 
-    return { message, handleSubmit };
+    return { message, error, handleSubmit };
   },
 };
 </script>

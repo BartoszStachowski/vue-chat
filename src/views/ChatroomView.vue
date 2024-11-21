@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <div class="container px-12">
-    <div>Chatroom</div>
+    <div class="text-white">Chatroom</div>
     <NewChatForm />
   </div>
 </template>

@@ -10,8 +10,7 @@ export default {
 </script>
 
 <style>
-#app {
+body {
   background: #1a1a1a;
-  height: 100vh;
 }
 </style>

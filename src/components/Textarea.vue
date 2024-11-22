@@ -4,7 +4,7 @@
     :value="modelValue"
     @input="updateValue"
     @keypress="handleKeypress"
-    class="textarea"
+    class="textarea focus:outline-none"
   ></textarea>
 </template>
 
@@ -40,11 +40,9 @@ export default defineComponent({
 <style scoped>
 .textarea {
   width: 100%;
-  min-height: 100px;
   padding: 8px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   resize: vertical;
+  box-sizing: border-box;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <div class="container px-0 md:px-12  mx-auto">
+  <div class="max-w-[796px] mx-auto h-full">
     <div class="text-white">Chatroom</div>
     <ChatWindow />
     <NewChatForm />

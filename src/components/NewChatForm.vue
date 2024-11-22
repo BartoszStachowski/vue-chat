@@ -5,7 +5,7 @@
       placeholder="Type a message and hit enter to send..."
       @keypress.enter.prevent="handleSubmit"
     />
-    <div class="error">{{error}}</div>
+    <div class="error">{{ error }}</div>
   </form>
 </template>
 <script>

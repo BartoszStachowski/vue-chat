@@ -1,44 +1,66 @@
 <template>
-  <div>
-    <div v-if="error">
+  <div class="chat-window">
+    <div v-if="error" class="text-red-500 font-semibold">
       {{ error }}
     </div>
 
-    <div v-if="documents" class="space-y-4">
-      <div
-        v-for="doc in documents"
-        :key="doc.id"
-      >
-        <span>
-          {{ doc.createdAt.toDate() }}
-        </span>
+    <div v-if="documents" class="messages space-y-4">
+      <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
+        <div class="text-sm text-gray-500">
+          {{ doc.createdAt }}
+        </div>
 
-        <span>
+        <div class="font-semibold text-gray-800">
           {{ doc.name }}
-        </span>
+        </div>
 
-        <span>
+        <div class="text-gray-700">
           {{ doc.message }}
-        </span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import getCollection from '@/composables/getCollection';
-import { onUnmounted } from 'vue';
+import { onUnmounted, computed } from 'vue';
+import { formatDistanceToNow } from 'date-fns';
 
 export default {
-    name: 'ChatWindow',
-    setup() {
-       const { documents, error, unsubscribe } = getCollection('messages');
-       console.log(documents)
+  name: 'ChatWindow',
+  setup() {
+    const { documents, error, unsubscribe } = getCollection('messages');
 
-       onUnmounted(() => {
-           unsubscribe();
-       });
+    const formattedDocuments = computed(() => {
+      if (documents.value) {
+        return documents.value.map((doc) => {
+          let time = formatDistanceToNow(doc.createdAt.toDate());
+          return { ...doc, createdAt: time };
+        });
+      }
+    });
 
-       return {error, documents}
-    }
-}
+    onUnmounted(() => {
+      unsubscribe();
+    });
+
+    return { error, documents, formattedDocuments };
+  },
+};
 </script>
+
+<style>
+.chat-window {
+  background: #fafafa;
+  padding: 30px 20px;
+}
+
+.single {
+  margin: 18px 0;
+}
+
+.messages {
+  max-height: 400px;
+  overflow: auto;
+}
+</style>

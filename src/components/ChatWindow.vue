@@ -1,15 +1,11 @@
 <template>
-  <div class="bg-neutral-50 py-6 px-5">
+  <div class="chat-window">
     <div v-if="error" class="text-red-500 font-semibold">
       {{ error }}
     </div>
 
-    <div
-      v-if="documents"
-      class="messages space-y-4 max-h-[400px] overflow-auto"
-      ref="messages"
-    >
-      <div v-for="doc in formattedDocuments" :key="doc.id" class="my-4 mx-0">
+    <div v-if="documents" class="messages space-y-4" ref="messages">
+      <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
         <div class="text-sm text-gray-500">
           {{ doc.createdAt }}
         </div>
@@ -59,3 +55,19 @@ export default {
   },
 };
 </script>
+
+<style>
+.chat-window {
+  background: #fafafa;
+  padding: 30px 20px;
+}
+
+.single {
+  margin: 18px 0;
+}
+
+.messages {
+  max-height: 400px;
+  overflow: auto;
+}
+</style>

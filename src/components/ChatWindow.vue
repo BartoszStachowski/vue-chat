@@ -4,7 +4,7 @@
       {{ error }}
     </div>
 
-    <div v-if="documents" class="messages space-y-4" ref="messages">
+    <div v-if="formattedDocuments" class="messages space-y-4" ref="messages">
       <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
         <div class="text-sm text-gray-500">
           {{ doc.createdAt }}
@@ -23,25 +23,25 @@
 </template>
 <script>
 import getCollection from '@/composables/getCollection';
-import { onUnmounted, computed, onUpdated, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 import { formatDistanceToNow } from 'date-fns';
 
 export default {
   name: 'ChatWindow',
   setup() {
-    const { documents, error, unsubscribe } = getCollection('messages');
+    const { documents, error } = getCollection('messages');
 
     const formattedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.map((doc) => {
-          let time = formatDistanceToNow(doc.createdAt.toDate());
+          let time =
+            doc.createdAt && typeof doc.createdAt.toDate === 'function'
+              ? formatDistanceToNow(doc.createdAt.toDate())
+              : 'Unknown time';
           return { ...doc, createdAt: time };
         });
       }
-    });
-
-    onUnmounted(() => {
-      unsubscribe();
+      return [];
     });
 
     // auto-scroll to bottom

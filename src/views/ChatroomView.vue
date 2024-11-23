@@ -1,8 +1,8 @@
 <template>
   <Navbar />
-  <div class="max-w-[796px] mx-auto h-full">
+  <div class="max-w-[796px] mx-auto">
     <div class="text-white">Chatroom</div>
-    <ChatWindow />
+    <ChatWindow class="rounded-t-lg" />
     <NewChatForm />
   </div>
 </template>

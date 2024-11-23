@@ -3,6 +3,7 @@
     <Textarea
       v-model="message"
       placeholder="Type a message and hit enter to send..."
+      class="rounded-b-lg"
       @keypress.enter.prevent="handleSubmit"
     />
     <div class="error">{{ error }}</div>

@@ -2,7 +2,7 @@
   <button
     :type="type"
     :class="[
-      'w-full py-2 px-4 rounded-md text-white focus:ring-2 focus:ring-opacity-50',
+      'py-2 px-4 rounded-md text-white focus:ring-2 focus:ring-opacity-50',
       variantClasses,
       sizeClasses,
     ]"
@@ -22,10 +22,12 @@ export default defineComponent({
       type: String,
       default: 'button',
     },
+    // secondary / danger
     variant: {
       type: String,
       default: 'primary',
     },
+    // small / large
     size: {
       type: String,
       default: 'medium',

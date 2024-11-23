@@ -28,7 +28,7 @@
         </div>
 
         <div class="text-red-600 mb-2">{{ error }}</div>
-        <Button type="submit">Sign in</Button>
+        <Button type="submit" class="w-full">Sign in</Button>
       </form>
     </div>
   </div>

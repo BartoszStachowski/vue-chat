@@ -27,3 +27,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Or check
+
+```sh
+https://bartoszstachowski.github.io/vue-chat/
+```

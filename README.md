@@ -31,5 +31,5 @@ npm run build
 ### Or check
 
 ```sh
-[npm run build](https://bartoszstachowski.github.io/vue-chat/)
+https://bartoszstachowski.github.io/vue-chat/
 ```
